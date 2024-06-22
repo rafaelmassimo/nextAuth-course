@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const Nav = async () => {
 	const session = await getServerSession(options);
-	console.log('session', session);
+	// console.log('session', session); Im commenting out because we add two console.log in the middleware.ts
 
 	return (
 		<header className="bg-gray-600 text-gray-100">
@@ -13,7 +13,11 @@ const Nav = async () => {
 				<div>my site</div>
 				<div className="flex gap-10">
 					<Link href="/">Home</Link>
-					<Link href="/CreateUser">Create User</Link>
+					{/* Here Im saying, first if we have a session, and the role of the user of this current session is Admin, then we can show the link 
+					THIS IS A CHECKING IN THE FRONTEND by using the middleware.ts we can check the role of the user
+					...&& means = if the first condition is true then show the rest */}
+					{session?.user.role === "Admin" && (<Link href="/CreateUser">Create User</Link>)}
+
 					<Link href="/ClientMember">Client Member</Link>
 					<Link href="/Member">Member</Link>
 					<Link href="/Public">Public</Link>
