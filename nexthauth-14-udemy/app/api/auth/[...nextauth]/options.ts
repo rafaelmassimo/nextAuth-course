@@ -8,12 +8,16 @@ const options: NextAuthOptions = {
             profile(profile){
                 console.log('Profile Github:', profile);
                 let userRole = 'Github User'
+                // This is user is going to be inside session.user.role you can see it on Member page if you are logged in
+                //if you area logging in with github you can see the userRole is admin user as set below
                 if(profile?.email === 'rafael_massimo@hotmail.com'){
                     userRole = "Admin"
                 }
                 return {
+                    //here im sending all the properties that I got from github and make it separate
                     ...profile,
-                    userRole
+                    //Here I'm applying the userRole to the user that I decided few line above
+                    role: userRole
                 }
             },
             clientId: process.env.GITHUB_CLIENT_ID!,
@@ -23,12 +27,15 @@ const options: NextAuthOptions = {
             profile(profile){
                 console.log('Profile Google:', profile);
                 let userRole = 'Google User'
-                if(profile?.email === 'rafael_massimo@hotmail.com'){
-                    userRole = "Admin"
-                }
+                //Here we are going to have the userRole as google User from the line 27 you can see it on the Member page if you are logged in
+                // if(profile?.email === 'rafael_massimo@hotmail.com'){
+                //     userRole = "Admin"
+                // }
                 return {
+                    //here im sending all the properties that I got from google and make it separate
                     ...profile,
-                    userRole,
+                      //Here I'm applying the userRole to the user that I decided few line above
+                    role: userRole,
                     id:profile.sub
                 }
             },
@@ -45,7 +52,8 @@ const options: NextAuthOptions = {
         },
         session({session, token}) {
             if(session.user){
-                session.user.role = token.role || "USER"
+                //if you do not have a role it will be a *user* as defined below
+                session.user.role = token.role || "*USER*"
             }
             return session
         }

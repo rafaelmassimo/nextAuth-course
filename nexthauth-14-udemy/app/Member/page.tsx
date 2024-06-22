@@ -1,9 +1,21 @@
+import { getServerSession } from 'next-auth'
 import React from 'react'
+import options from '@/app/api/auth/[...nextauth]/options'
+import { redirect } from 'next/navigation'
 
-const Member = () => {
+getServerSession(options)
+
+const Member = async () => {
+  const session = await getServerSession(options);
+
+  if(!session) {
+    redirect('/api/auth/signin?callbackUrl=/Member')
+  }
   return (
     <div>
-      Member
+      <h1>Member Server Page</h1>
+      <p>{session.user.email}</p>
+      <p>{session.user.role}</p>
     </div>
   )
 }
