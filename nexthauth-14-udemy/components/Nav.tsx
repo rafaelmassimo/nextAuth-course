@@ -16,7 +16,7 @@ const Nav = async () => {
 					{/* Here Im saying, first if we have a session, and the role of the user of this current session is Admin, then we can show the link 
 					THIS IS A CHECKING IN THE FRONTEND by using the middleware.ts we can check the role of the user
 					...&& means = if the first condition is true then show the rest */}
-					{session?.user.role === "Admin" && (<Link href="/CreateUser">Create User</Link>)}
+					{session?.user.role === "ADMIN" && (<Link href="/CreateUser">Create User</Link>)}
 
 					<Link href="/ClientMember">Client Member</Link>
 					<Link href="/Member">Member</Link>

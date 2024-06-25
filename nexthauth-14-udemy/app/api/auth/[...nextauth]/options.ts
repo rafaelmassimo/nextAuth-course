@@ -9,9 +9,9 @@ const options: NextAuthOptions = {
                 // console.log('Profile Github:', profile);
                 let userRole = 'Github User'
                 // This is user is going to be inside session.user.role you can see it on Member page if you are logged in
-                //if you area logging in with github you can see the userRole is admin user as set below
+                //if you area logging in with github you can see the userRole is ADMIN user as set below
                 if(profile?.email === 'rafael_massimo@hotmail.com'){
-                    userRole = "Admin"
+                    userRole = "ADMIN"
                 }
                 return {
                     //here im sending all the properties that I got from github and make it separate
@@ -26,10 +26,10 @@ const options: NextAuthOptions = {
         GoogleProvider({
             profile(profile){
                 // console.log('Profile Google:', profile);
-                let userRole = 'Google User'
+                let userRole = 'USER'
                 //Here we are going to have the userRole as google User from the line 27 you can see it on the Member page if you are logged in
                 // if(profile?.email === 'rafael_massimo@hotmail.com'){
-                //     userRole = "Admin"
+                //     userRole = "ADMIN"
                 // }
                 return {
                     //here im sending all the properties that I got from google and make it separate
